@@ -1,0 +1,51 @@
+.navbar {
+    display: flex;
+    background-color: #4682b4;
+    justify-content: space-evenly;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.list {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.item {
+    margin-right: 1em;
+}
+
+.item a{
+    color: #FFF;
+    text-decoration: none;
+}
+
+.item a:hover{
+    color: #ffbb33;
+}
+
+.titulo {
+    color: #fdc13b;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.status {
+    font-weight: normal;
+    padding: 0.5em;
+    
+    align-items: flex-end
+}
+
+.conectado {
+    color:#7CFC00;
+}
+
+.desconectado {
+    color:  #f7979e;
+}
+
+.span {
+    font-weight: bold;
+}

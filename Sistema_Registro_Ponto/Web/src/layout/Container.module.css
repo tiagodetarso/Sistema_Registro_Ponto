@@ -1,0 +1,39 @@
+.container {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.cont {
+    flex-direction: row;
+}
+
+.min_height {
+    min-height: 55%;
+}
+
+.start {
+    justify-content: flex-start;
+}
+
+.column {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.columnNav {
+    width:400px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.columnWidth {
+    width:400px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

@@ -1,0 +1,15 @@
+.btn {
+    color: #4682b4;
+    padding: 1em 7em;
+    text-decoration: none;
+    transition: 0.5s;
+    text-decoration-style: dashed;
+}
+
+.btn:hover {
+    color: #ffbb33;
+}
+
+.txt {
+    text-decoration-style: dotted;
+}

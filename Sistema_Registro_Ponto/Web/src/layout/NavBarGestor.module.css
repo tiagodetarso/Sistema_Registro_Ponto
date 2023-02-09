@@ -1,0 +1,40 @@
+.navbar {
+    display: flex;
+    flex-direction: 'column';
+    justify-content: space-evenly;
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+.list {
+    padding: 0.2em;
+    list-style: none;
+    align-items: center;
+}
+
+.item {
+    padding: 0.5em;
+    margin-right: 0.5em;
+}
+
+.item a{
+    color: #000489;
+    text-decoration: none;
+}
+
+.item a:hover{
+    color: #ffbb33;
+}
+
+.titulo {
+    color: #4682b4;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0.5em;
+    margin-right: 0.5em;
+    text-decoration: underline;
+}
+
+.span {
+    font-weight: bold;
+}

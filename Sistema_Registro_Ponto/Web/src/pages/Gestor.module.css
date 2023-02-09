@@ -1,0 +1,48 @@
+.text{
+    color: #4682b4;
+    font-weight: bold;
+    padding: 0.5em;
+}
+
+.tabela {
+    width: 450px;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+.celtabhead {
+    font-weight: bold;
+    font-size: 1em;
+    color: #4682b4;
+    text-align: center;
+    border: 0.15em;
+    border-collapse: collapse;
+}
+
+.celtabbody {
+    padding: 0.2em;
+    font-size: 0.75em;
+    color: #4682b4;
+    text-align: center;
+    border: 0.15em ;
+    border-collapse: collapse;
+}
+
+.celtabnome {
+    padding: 0.2em;
+    font-size: 0.75em;
+    color: #4682b4;
+    text-align: left;
+    border: 0.15em ;
+    border-collapse: collapse;
+}
+
+.icon {
+    color: #4682b4;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.icon:hover {
+    color: #ffa500;
+}

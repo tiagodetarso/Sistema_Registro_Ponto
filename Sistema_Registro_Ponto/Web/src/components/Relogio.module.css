@@ -1,0 +1,18 @@
+.div {
+    padding:0.1em;
+    background-color:azure;
+    color: #4682b4;
+    justify-content: flex-start;
+    border-radius: 0.5em;
+    width: 400px;
+    margin-top:0.5em;
+}
+
+.p {
+    padding: 1em;
+    font-size: 12.5px;
+}
+
+.span{
+    font-weight: bold;
+}

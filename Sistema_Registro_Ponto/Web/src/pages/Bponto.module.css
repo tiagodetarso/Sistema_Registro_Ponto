@@ -1,0 +1,42 @@
+.text{
+    color: #4682b4;
+    font-weight: bold;
+    padding: 0.5em;
+}
+
+.id {
+    padding:1em;
+    font-size: 12.5px;
+    background-color:azure;
+    color: #4682b4;
+    justify-content: flex-start;
+    border-radius: 0.5em;
+    width: 400px;
+    margin-top:0.5em;
+}
+
+span {
+    font-weight: bold;
+    font-size: 12.5px;
+}
+
+table {
+    width: 500px;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+thead td {
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+tbody td {
+    font-size: 0.75em;
+    text-align: center;
+    border: 1px solid;
+    border-collapse: collapse;
+}
