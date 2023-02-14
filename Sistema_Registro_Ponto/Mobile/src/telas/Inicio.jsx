@@ -39,6 +39,12 @@ export default function Inicio({navigation, route}) {
                 </TouchableHighlight>
                 <TouchableHighlight
                     style={styles.botao}
+                    onPress={()=>navigation.navigate("Redefinir Senha", {paramKey: funcionario.registration})}
+                >
+                    <Text style={styles.txtBotao}>Redefinir Senha</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    style={styles.botao}
                     onPress={()=>navigation.navigate('Login')}
                 >
                     <Text style={styles.txtBotao}>Sair</Text>

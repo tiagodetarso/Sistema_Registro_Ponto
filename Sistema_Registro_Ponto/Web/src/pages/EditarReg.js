@@ -14,7 +14,7 @@ function EditarReg ({ employee, EditarRegToApp }) {
     const dadosRegistro = location.state
 
     function Editar (dados) {
-        
+        const apiUrl = process.env.REACT_APP_API_URL
         const enviaDados = {
             id: dados.id,
             registration: dados.registration,
@@ -26,7 +26,7 @@ function EditarReg ({ employee, EditarRegToApp }) {
             hora: dados.time
         }
 
-        fetch ('http://localhost:4000/register/editar', {
+        fetch (`http://${apiUrl}/register/editar`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',

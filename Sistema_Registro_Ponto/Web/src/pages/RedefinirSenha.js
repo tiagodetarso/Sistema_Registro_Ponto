@@ -11,8 +11,8 @@ function RedefinirSenha({ employee, RedefinirSenhaToApp }) {
     const navigate = useNavigate()
 
     function Redefinir (dadosForm) {
-
-        fetch ('http://localhost:4000/employee/redefinirsenha', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/employee/redefinirsenha`, {
                 method: 'PATCH',
                 headers: {
                     'Content-type': 'application/json',

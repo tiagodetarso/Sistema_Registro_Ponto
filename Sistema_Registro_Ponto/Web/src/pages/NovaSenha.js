@@ -9,8 +9,8 @@ function NovaSenha({ NovaSenhaToApp }) {
     const navigate = useNavigate()
 
     function RedefinirSenha(dadosForm) {
-
-        fetch ('http://192.168.200.103:4000/employee/novasenha', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/employee/novasenha`, {
                 method: 'PATCH',
                 headers: {
                     'Content-type': 'application/json',

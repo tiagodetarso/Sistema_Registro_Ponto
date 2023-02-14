@@ -1,6 +1,6 @@
 import styles from './TextButton.module.css'
 
-function Button ({ text, handleOnClick }) {
+function TextButton ({ text, handleOnClick }) {
     return (
         <div>
             <button 

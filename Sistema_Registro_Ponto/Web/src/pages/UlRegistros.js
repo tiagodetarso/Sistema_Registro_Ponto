@@ -10,7 +10,8 @@ function UlRegistros ({ employee }) {
     const [registros, setRegistros] = useState({})
 
     useEffect(() => {
-        fetch ('http://localhost:4000/register/ultimos', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/register/ultimos`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',

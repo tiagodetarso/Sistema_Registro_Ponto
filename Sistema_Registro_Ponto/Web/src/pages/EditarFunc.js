@@ -14,7 +14,8 @@ function Editar ({ employee, EditarToApp }) {
     const dadosFuncionario = location.state
 
     function Editar (dados) {
-        fetch ('http://localhost:4000/employee/editar', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/employee/editar`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',

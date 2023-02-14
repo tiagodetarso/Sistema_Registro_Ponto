@@ -12,7 +12,8 @@ function CadastrarFunc ({ employee, CadastrarFuncToApp }) {
     const navigate = useNavigate()
 
     function Cadastrar (newEmployee) {
-        fetch ('http://localhost:4000/employee/register', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/employee/register`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

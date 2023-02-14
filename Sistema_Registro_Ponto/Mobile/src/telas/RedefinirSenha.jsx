@@ -3,51 +3,55 @@ import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableHighlight, Al
 
 import Header from '../layout/Header'
 
-export default function Login({navigation}) {
+export default function RedefinirSenha({navigation, route}) {
 
-    const [matricula, setMatricula] = useState("")
-    const [senha, setSenha] = useState("")
-    const [funcionario, setFuncionario] = useState({})
-    
-    function Logar () {
-      fetch (`${API_URL}/employee/login`, {
-            method: 'POST',
+  const registration = route.params.paramKey
+
+  const [matricula, setMatricula] = useState(registration)
+  const [senha, setSenha] = useState("")
+  const [repetirSenha, setRepetirSenha] = useState("")
+
+  function Redefinir () {
+
+    fetch ('http://192.168.200.103:4000/employee/redefinirsenha', {
+            method: 'PATCH',
             headers: {
-              'Content-type': 'application/json',
+                'Content-type': 'application/json',
             },
-            body: JSON.stringify({registration: matricula, password: senha}),
+            body: JSON.stringify(
+              {
+                registration: matricula,
+                newPassword: senha,
+                repeatPassword: repetirSenha
+              }
+            )
         })
         .then(resp => resp.json())
         .then((data) => {
-            var receivedData = data ? data : {msg:"", content:""}
-            setFuncionario(receivedData.content)
-            if (receivedData.msg === "Login realizado com sucesso") {
-              navigation.navigate("Inicio", {paramKey: receivedData.content})
-            }
-          Alert.alert(receivedData.msg)
-          setMatricula('')
-          setSenha('')
+          Alert.alert(data.msg)
+          setSenha("")
+          setRepetirSenha("")
         })
         .catch((err) => console.log(err))
-    }
+}
 
-    return (
-      <SafeAreaView style={styles.container}>
-        <Header />
-        <Text>Faça seu login!</Text>
-        <View style={styles.corpo}>
+  return (
+    <SafeAreaView style={styles.container}>
+      <Header />
+      <Text>REDEFINIR SENHA</Text>
+      <View style={styles.corpo}>
           <View style ={styles.matricula}>
               <Text style = {styles.txtCampos}>Matrícula:</Text>
               <TextInput
                 style={styles.txtbx}
                 keyboardType='numeric'
                 keyboardAppearance='dark'
-                onChangeText={setMatricula}
                 value={matricula}
+                readOnly={true}
               />
           </View>
           <View style = {styles.senha}>
-              <Text style = {styles.txtCampos}>Senha:</Text>
+              <Text style = {styles.txtCampos}>Nova Senha:</Text>
               <TextInput
                 style={styles.txtbx}
                 textContentType='password'
@@ -57,28 +61,31 @@ export default function Login({navigation}) {
                 value={senha}
               />
           </View>
-          <View style={styles.reSenha}>
-            <TouchableHighlight
-              style={styles.botaoRecup}
-              onPress={()=>navigation.navigate("Recuperar Senha")}
-            >
-                <Text style = {styles.txtRecup}>Esqueceu a senha?</Text>
-            </TouchableHighlight>
+          <View style = {styles.senha}>
+              <Text style = {styles.txtCampos}>Repetir Senha:</Text>
+              <TextInput
+                style={styles.txtbx}
+                textContentType='password'
+                keyboardAppearance='dark'
+                secureTextEntry={true}
+                onChangeText={setRepetirSenha}
+                value={repetirSenha}
+              />
           </View>
           <View style={styles.entrar}>
             <TouchableHighlight
               style={styles.botaoEntra}
-              onPress={()=>Logar()}
+              onPress={()=>Redefinir()}
             >
-                <Text style = {styles.txtEntra}>Entrar</Text>
+                <Text style = {styles.txtEntra}>Redefinir Senha</Text>
             </TouchableHighlight>
           </View>
-        </View>
-      </SafeAreaView>
-    );
-  }
-  
-  const styles = StyleSheet.create({
+        </View>  
+    </SafeAreaView>
+)
+}
+
+const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#87CEFA',
@@ -122,11 +129,6 @@ export default function Login({navigation}) {
       justifyContent: 'center',
       padding:10,
     },
-    reSenha: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding:10,
-    },
     entrar: {
       padding:10,
       alignSelf:'flex-end'
@@ -137,8 +139,5 @@ export default function Login({navigation}) {
       padding: 10,
       width: 250,
       alignItems: 'center',
-    },
-    botaoRecup: {
-      marginLeft: 100
     },
   });

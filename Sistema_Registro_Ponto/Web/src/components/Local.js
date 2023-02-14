@@ -24,8 +24,6 @@ function Local ({ LocalToBponto }) {
         LocalToBponto(localidade)
     }
 
-
-
     return(
             <div className={styles.div}>
                 <p className={styles.p}>LATITUDE: <span className={styles.span}>{currentLat}</span> LONGITUDE: <span className={styles.span}>{currentLong}</span></p>

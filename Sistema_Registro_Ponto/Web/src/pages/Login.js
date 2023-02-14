@@ -10,7 +10,9 @@ function Login ({ LoginToApp }) {
 
     function Logar (employee) {
 
-        fetch ('http://localhost:4000/employee/login', {
+        const apiUrl = process.env.REACT_APP_API_URL
+
+        fetch (`http://${apiUrl}/employee/login`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

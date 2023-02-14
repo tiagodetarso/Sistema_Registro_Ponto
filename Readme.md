@@ -24,7 +24,7 @@ Sistema para Registro de Ponto Eletrônico
     - Registrar Ponto com data, hora e coordenadas geográficas; CONCLUÍDO
     - Apresentação dos registros dos últimos sete dias do funcionário logado; CONCLUÍDO
     - Comunicação com o setor de RH; CONCLUÍDO
-    - Redefinição de senha; PENDENTE
+    - Redefinição de senha; CONCLUÍDO
 
   - API própria (nodeJS, Express, Mongoose)> possui, até agora, as seguintes rotas:
     - Rota para cadastrar funcionário; CONCLUÍDO

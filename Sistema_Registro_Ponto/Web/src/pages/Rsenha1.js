@@ -19,8 +19,8 @@ function Rsenha1({ RsenhaToApp }) {
     const [endereco, setEndereco] = useState("")
 
     function pegarCodigoRecuperacao(dadosForm) {
-        
-        fetch ('http://192.168.200.103:4000/employee/rsenha', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/employee/rsenha`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

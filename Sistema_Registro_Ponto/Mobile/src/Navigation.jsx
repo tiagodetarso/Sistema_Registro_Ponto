@@ -9,6 +9,7 @@ import BaterPonto from './telas/BaterPonto'
 import UltimosRegistros from './telas/UltimosRegistros'
 import MensagemRH from './telas/MensagemRH'
 import RecupSenha from './telas/RecupSenha'
+import RedefinirSenha from './telas/RedefinirSenha'
 
 const Stack = createStackNavigator()
 
@@ -24,6 +25,7 @@ export default function Navigation() {
                 <Stack.Screen name="Bater Ponto" component={BaterPonto} />
                 <Stack.Screen name="Ultimos Registros" component={UltimosRegistros} />
                 <Stack.Screen name="Mensagem ao RH" component={MensagemRH} />
+                <Stack.Screen name="Redefinir Senha" component={RedefinirSenha} />
                 <Stack.Screen name="Recuperar Senha" component={RecupSenha} />
             </Stack.Navigator>
         </NavigationContainer>

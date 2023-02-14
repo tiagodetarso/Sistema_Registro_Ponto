@@ -26,7 +26,7 @@ export default function Localizacao ({LocalizacaoToBponto}) {
     }, [])
 
     useEffect(() => {
-        fetch (`http://api.positionstack.com/v1/reverse?access_key=015a462a521ee9628c8d5f738adc7db5&query=${local.coords.latitude},${local.coords.longitude}`)
+        fetch (`http://api.positionstack.com/v1/reverse?access_key=3205c5b13ce6fde754d0973dc22cb041&query=${local.coords.latitude},${local.coords.longitude}`)
             .then(resp => resp.json())
             .then((data) => {
                 setAdress(data.data[0].label)

@@ -27,7 +27,7 @@ export default function UltimosRegistros({ route }) {
     return (
         <SafeAreaView style={styles.container}>
             <Header />
-            <Text style={styles.titulo}>ÚLTIMOS REGISTROS</Text>
+            <Text>ÚLTIMOS REGISTROS</Text>
             <ScrollView style={styles.scroll}>
             <DataTable>
                 <DataTable.Header>

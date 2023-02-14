@@ -11,14 +11,14 @@ function Relatorios({ employee, RelatorioToApp }) {
     const navigate = useNavigate()
 
     function GerarRelatorio (datas) {
-
+        const apiUrl = process.env.REACT_APP_API_URL
         const fetchBody = {
             registration: employee.registration,
             initialDate: datas.initialDate,
             finalDate: datas.finalDate
         }
 
-        fetch ('http://localhost:4000/register/relatorio', {
+        fetch (`http://${apiUrl}/register/relatorio`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

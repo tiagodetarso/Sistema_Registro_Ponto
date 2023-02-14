@@ -14,8 +14,6 @@ function Bponto ({ employee, BpontoToApp }) {
 
     const navigate = useNavigate()
 
-    const accessKEY = process.env.REACT_APP_ACCESS_KEY
-
     const[adress, setAdress] = useState("")
     const[local, setLocal] = useState({})
     const[date, setDate] = useState({})
@@ -30,6 +28,8 @@ function Bponto ({ employee, BpontoToApp }) {
 
     function Registrar () {
 
+        const apiUrl = process.env.REACT_APP_API_URL
+
         let registro = 
             {
                 registration: employee.registration,
@@ -43,8 +43,8 @@ function Bponto ({ employee, BpontoToApp }) {
 
             console.log(registro)
             console.log(JSON.stringify(registro))
-
-        fetch ('http://localhost:4000/register', {
+        
+        fetch (`http://${apiUrl}/register`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -62,7 +62,8 @@ function Bponto ({ employee, BpontoToApp }) {
     }
 
     useEffect(() => {
-        fetch (`http://api.positionstack.com/v1/reverse?access_key=3205c5b13ce6fde754d0973dc22cb041&query=${local.latitude},${local.longitude}`)
+        const accessKEY = process.env.REACT_APP_ACCESS_KEY
+        fetch (`http://api.positionstack.com/v1/reverse?access_key=${accessKEY}&query=${local.latitude},${local.longitude}`)
             .then(resp => resp.json())
             .then((data) => {
                 console.log(data)

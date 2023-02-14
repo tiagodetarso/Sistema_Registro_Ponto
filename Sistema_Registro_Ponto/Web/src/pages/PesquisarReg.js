@@ -18,7 +18,8 @@ function PesquisarReg ({ employee, PesquisarRegToApp }) {
     const [dadosPesquisa, setDadosPesquisa] = useState()
 
     function pesquisar (filtros) {
-        fetch ('http://localhost:4000/register/filtro', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/register/filtro`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -66,7 +67,8 @@ function PesquisarReg ({ employee, PesquisarRegToApp }) {
     }
 
     function TableDel (id) {
-        fetch ('http://localhost:4000/register/delete', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/register/delete`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

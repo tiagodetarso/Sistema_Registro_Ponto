@@ -13,6 +13,7 @@ function InserirReg ({ employee, InserirRegToApp }) {
 
     function Inserir (dados) {
 
+        const apiUrl = process.env.REACT_APP_API_URL
         const tempo = new Date(`${dados.date}T${dados.time}`)
         const time = tempo.getTime()
 
@@ -25,7 +26,7 @@ function InserirReg ({ employee, InserirRegToApp }) {
             numberTime: time
         }
         
-        fetch ('http://localhost:4000/register', {
+        fetch (`http://${apiUrl}/register`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

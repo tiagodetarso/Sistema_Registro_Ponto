@@ -12,7 +12,8 @@ function GerarRelat ({ employee, RelatorioGestorToApp }) {
     const navigate = useNavigate()
 
     function Relatorio (dados) {
-        fetch ('http://localhost:4000/register/relatorio', {
+        const apiUrl = process.env.REACT_APP_API_URL
+        fetch (`http://${apiUrl}/register/relatorio`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
