@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, Text, SafeAreaView, ScrollView, Alert } from 'react-native'
 import { DataTable } from 'react-native-paper';
 
 import Header from '../layout/Header'
@@ -24,6 +24,13 @@ export default function UltimosRegistros({ route }) {
             .catch((err) => console.log(err))
     },[])
 
+    function SepararString (str) {
+        const index = str.indexOf(",");
+        const parte1 = str.substring(0, index);
+        const parte2 = str.substring(index + 1);
+        return (parte1+"\n"+parte2)
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Header />
@@ -31,26 +38,26 @@ export default function UltimosRegistros({ route }) {
             <ScrollView style={styles.scroll}>
             <DataTable>
                 <DataTable.Header>
-                    <DataTable.Title style={{flex: 2}}>Dia e Hora</DataTable.Title>
-                    <DataTable.Title>Latitude</DataTable.Title>
-                    <DataTable.Title>Longitude</DataTable.Title>
+                    <DataTable.Title>Dia e Hora</DataTable.Title>
+                    <DataTable.Title>Logradouro</DataTable.Title>
                 </DataTable.Header>
                 
                 {registros.length > 0 &&
                         registros.map((registro) => (
-                <DataTable.Row key={registro.id}>
-                    <DataTable.Cell style={{flex: 2}} key={`${registro.id}DiaHora`}>
+                <DataTable.Row style={styles.row} key={registro.id}>
+                    <DataTable.Cell style={styles.diaHora} key={`${registro.id}DiaHora`}>
                         {
                             ("0"+new Date(registro.numberTime).getDate()).slice(-2)+"/"+
-                            ("0"+new Date(registro.numberTime).getMonth()+1).slice(-2)+"/"+
-                            new Date(registro.numberTime).getFullYear()+" - "+
+                            ("0"+new Date(registro.numberTime).getMonth()+1).slice(-2)+"-"+
                             ("0"+new Date(registro.numberTime).getHours()).slice(-2)+":"+
-                            ("0"+new Date(registro.numberTime).getMinutes()).slice(-2)+":"+
-                            ("0"+new Date(registro.numberTime).getSeconds()).slice(-2)
+                            ("0"+new Date(registro.numberTime).getMinutes()).slice(-2)
                         }
                     </DataTable.Cell>
-                    <DataTable.Cell key={`${registro.id}Lat`}>{registro.geoLocal.latitude}</DataTable.Cell>
-                    <DataTable.Cell key={`${registro.id}Long`}>{registro.geoLocal.longitude}</DataTable.Cell>
+                    <DataTable.Cell style={styles.local} key={`${registro.id}Loc`}>
+                        <Text numberOfLines={2} style={styles.text}>
+                            {registro.geoLocal.stringLocal}
+                        </Text>
+                    </DataTable.Cell>
                 </DataTable.Row>
                         ))
                 }
@@ -69,18 +76,33 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBotton: 20
     },
-    registros: {
-        backgroundColor: 'dodgerBlue',
-        borderRadius: 10,
-        marginTop: 50,
-    },
-    item: {
-        padding: 10,
-        fontSize: 12,
-        fontWeight: 'bold',
-        color: 'white',
-    },
     scroll: {
-        width: '100%'
+        width: '100%',
+    },
+    row: {
+        flex: 1,
+        textAlign: 'auto',
+    },
+    diaHora: {
+        flex: 1,
+        textAlign: 'auto',
+    },
+    local: {
+        flex: 3,
+        textAlign: 'center',
+        width: 200
+    },
+    hRow: {
+        flex: 1,
+        textAlignVertical: 'center'
+    },
+    hDiaHora: {
+        flex: 1,
+    },
+    hLocal: {
+        flex: 3,
+    },
+    text: {
+        fontSize: 9
     }
-});
+})

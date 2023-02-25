@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native'
 import * as Location from 'expo-location';
 
-export default function Localizacao ({LocalizacaoToBponto}) {
+export default function Localizacao ({LocalizacaoToBponto, AdressToBponto}) {
 
     const positionApiAcessKey = process.env.POSITION_API_ACCESS_KEY
 
@@ -13,7 +13,7 @@ export default function Localizacao ({LocalizacaoToBponto}) {
 
         let {status} = await Location.requestForegroundPermissionsAsync()
         if (status != 'granted') {
-            Alert.alert('Permission to acess location was denied')
+            Alert.alert('Permission to access location was denied')
             return;
             }
         
@@ -30,6 +30,7 @@ export default function Localizacao ({LocalizacaoToBponto}) {
             .then(resp => resp.json())
             .then((data) => {
                 setAdress(data.data[0].label)
+                AdressToBponto(data.data[0].label)
             })
             .catch((err) => console.log(err))      
     },[local])

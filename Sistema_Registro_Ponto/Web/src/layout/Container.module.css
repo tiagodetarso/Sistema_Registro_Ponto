@@ -25,14 +25,14 @@
 }
 
 .columnNav {
-    width:400px;
+    width:420px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
 .columnWidth {
-    width:400px;
+    width:420px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;

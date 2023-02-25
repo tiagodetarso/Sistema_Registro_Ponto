@@ -9,15 +9,15 @@ import styles from './LoginForm.module.css'
 
 function RegEditForm ({ handleSubmit, btnText, dados }) {
 
-    const [ dadosFunc, setDadosFunc ] = useState(dados)
+    const [ dadosReg, setDadosFunc ] = useState(dados)
     
     const submit = (e) => {
         e.preventDefault()
-        handleSubmit(dadosFunc)
+        handleSubmit(dadosReg)
     }
 
     const handleChange = (e) => {
-        setDadosFunc({ ...dadosFunc, [e.target.name]: e.target.value})
+        setDadosFunc({ ...dadosReg, [e.target.name]: e.target.value})
     }
 
     return (
@@ -28,7 +28,7 @@ function RegEditForm ({ handleSubmit, btnText, dados }) {
                 name="id"
                 placeholder='Digite o número do id do registro'
                 handleOnChange={handleChange}
-                value={dadosFunc.id}
+                value={dadosReg.id}
             />
             <ReadInput
                 type="text"
@@ -36,7 +36,7 @@ function RegEditForm ({ handleSubmit, btnText, dados }) {
                 name="registration"
                 placeholder="Digite o número de matrícula do funcinário"
                 handleOnChange={handleChange}
-                value={dadosFunc.registration}
+                value={dadosReg.registration}
             />
             <Input 
                 type="number"
@@ -44,7 +44,7 @@ function RegEditForm ({ handleSubmit, btnText, dados }) {
                 name="latitude"
                 placeholder="Digite o valor da latitude"
                 handleOnChange={handleChange}
-                value={dadosFunc.latitude}
+                value={dadosReg.latitude}
                 step=".0000001"
             />
             <Input 
@@ -53,8 +53,16 @@ function RegEditForm ({ handleSubmit, btnText, dados }) {
                 name="longitude"
                 placeholder="Digite o valor da longitude"
                 handleOnChange={handleChange}
-                value={dadosFunc.longitude}
+                value={dadosReg.longitude}
                 step=".0000001"
+            />
+            <Input 
+                type="text"
+                text="Logradouro"
+                name="local"
+                placeholder="Digite o dia do registro (dd/mm/aaa)"
+                handleOnChange={handleChange}
+                value={dadosReg.local}
             />
             <Input 
                 type="text"
@@ -62,7 +70,7 @@ function RegEditForm ({ handleSubmit, btnText, dados }) {
                 name="date"
                 placeholder="Digite o dia do registro (dd/mm/aaa)"
                 handleOnChange={handleChange}
-                value={dadosFunc.date}
+                value={dadosReg.date}
             />
             <Input 
                 type="text"
@@ -70,7 +78,7 @@ function RegEditForm ({ handleSubmit, btnText, dados }) {
                 name="time"
                 placeholder="Digite a hora do registro"
                 handleOnChange={handleChange}
-                value={dadosFunc.time}
+                value={dadosReg.time}
             />
             <SubmitButton text={btnText} />
         </form>

@@ -10,7 +10,7 @@ export default function Login({navigation}) {
     const [funcionario, setFuncionario] = useState({})
     
     function Logar () {
-      fetch (`${API_URL}/employee/login`, {
+      fetch (`http://192.168.200.103:4000/employee/login`, {
             method: 'POST',
             headers: {
               'Content-type': 'application/json',

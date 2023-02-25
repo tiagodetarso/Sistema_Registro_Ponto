@@ -36,7 +36,7 @@ function App() {
   useEffect (() => {
     setTimeout(() => {
         setMensagem("")
-    }, 5000)
+    }, 4000)
 }, [mensagem])
 
 

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Relogio from '../components/Relogio'
 import Local from '../components/Local'
+import Foto from '../components/Foto'
 import LinkButton from '../layout/LinkButton'
 import Container from '../layout/Container'
 import Button from '../formitens/Button'
@@ -17,6 +18,11 @@ function Bponto ({ employee, BpontoToApp }) {
     const[adress, setAdress] = useState("")
     const[local, setLocal] = useState({})
     const[date, setDate] = useState({})
+    const[imageSrc, setImageSrc] = useState("")
+
+    function FotoToBponto ( data ) {
+        setImageSrc(data)
+    }
 
     function LocalToBponto ( data ) {
         setLocal(data)
@@ -27,8 +33,10 @@ function Bponto ({ employee, BpontoToApp }) {
     }
 
     function Registrar () {
-
+        
         const apiUrl = process.env.REACT_APP_API_URL
+       
+        const imageBuffer = Buffer.from(String(imageSrc).slice(22), 'base64')
 
         let registro = 
             {
@@ -36,9 +44,11 @@ function Bponto ({ employee, BpontoToApp }) {
                 geoLocal:
                     {
                         latitude:local.latitude,
-                        longitude:local.longitude
+                        longitude:local.longitude,
+                        stringLocal: adress
                     },
-                numberTime: date
+                numberTime: date,
+                image: imageBuffer
             }
 
             console.log(registro)
@@ -74,14 +84,31 @@ function Bponto ({ employee, BpontoToApp }) {
 
     if (employee.id) {
         return (
-            <Container customClass='column'>
-                <h1 style={{color: "#4682b4"}}>Bater PonTTo</h1>
-                <Relogio RelogioToBponto={RelogioToBponto} />
-                <Local LocalToBponto={LocalToBponto}/>
-                <span className={styles.id}>{adress}</span>
-                <p className={styles.id}><span>Nome: </span>{employee.name}</p>
-                <p className={styles.id}><span>Matrícula: </span>{employee.registration}</p>
-                <Button text='Bater PonTTo' handleOnClick={Registrar} />
+            <Container customClass='cont'>
+                <Container customClass='columnNav'>
+                    <h1 className={styles.text}>Bater PonTTo</h1>
+                    <Relogio RelogioToBponto={RelogioToBponto} />
+                    <Local LocalToBponto={LocalToBponto}/>
+                    <span className={styles.id}>{adress}</span>
+                    <p className={styles.id}><span>Nome: </span>{employee.name}</p>
+                    <p className={styles.id}><span>Matrícula: </span>{employee.registration}</p>
+                    <Button text='Bater PonTTo' handleOnClick={Registrar} />
+                </Container>
+                <Container customClass="columnNav" >
+                    { imageSrc ? (
+                        <div>
+                            <h1 className={styles.text}>Webcam</h1>
+                            <img src={imageSrc} alt="Captured" />
+                            <p className={styles.text}>Você já pode bater o ponto</p>
+                        </div>
+                        ) : (
+                        <div>
+                            <h1 className={styles.text}>Webcam</h1>
+                            <Foto FotoToBponto={FotoToBponto}/>
+                            <p className={styles.text}>Aguarde!</p>
+                        </div>
+                    )}
+                </Container>
             </Container>
         )
     } else {

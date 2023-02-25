@@ -41,6 +41,7 @@ function EditForm ({ handleSubmit, btnText, dados }) {
                 name="name"
                 placeholder="Digite o nome completo do funcionário"
                 handleOnChange={handleChange}
+                value={dadosFunc.name}
             />
             <Input 
                 type="text"

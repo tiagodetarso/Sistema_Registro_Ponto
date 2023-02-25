@@ -35,8 +35,7 @@ function UlRegistros ({ employee }) {
                     <thead>
                         <tr>
                             <td>Dia e hora</td>
-                            <td>Latitude</td>
-                            <td>Longitude</td>
+                            <td>Logradouro</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,8 +51,7 @@ function UlRegistros ({ employee }) {
                                     ("0"+new Date(registro.numberTime).getSeconds()).slice(-2)
                                     }
                                 </td>
-                                <td>{registro.geoLocal.latitude}</td>
-                                <td>{registro.geoLocal.longitude}</td>
+                                <td>{registro.geoLocal.stringLocal}</td>
                             </tr>   
                         ))
                     }

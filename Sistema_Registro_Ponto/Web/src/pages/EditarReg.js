@@ -20,7 +20,8 @@ function EditarReg ({ employee, EditarRegToApp }) {
             registration: dados.registration,
             geoLocal: {
                 latitude: dados.latitude,
-                longitude: dados.longitude
+                longitude: dados.longitude,
+                stringLocal: dados.local
             },
             dia: dados.date,
             hora: dados.time

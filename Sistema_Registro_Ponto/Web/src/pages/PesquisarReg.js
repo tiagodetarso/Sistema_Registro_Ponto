@@ -3,19 +3,22 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BsPencilFill } from "react-icons/bs"
 import { TiDelete } from "react-icons/ti"
+import { MdOutlinePhotoCamera } from "react-icons/md"
 
 import styles from './Gestor.module.css'
 
 import LinkButton from '../layout/LinkButton'
 import Container from '../layout/Container'
 import PesqRegForm from '../forms/PesqRegForm'
+import Modal from '../components/Modal'
 
 function PesquisarReg ({ employee, PesquisarRegToApp }) {
 
     const navigate = useNavigate()
-
     const [receivedData, setReceivedData] = useState([])
     const [dadosPesquisa, setDadosPesquisa] = useState()
+    const [modalAberto, setModalAberto] = useState(false)
+    const [imagem, setImagem] = useState(null)
 
     function pesquisar (filtros) {
         const apiUrl = process.env.REACT_APP_API_URL
@@ -61,6 +64,7 @@ function PesquisarReg ({ employee, PesquisarRegToApp }) {
                                                     registration: registro.registration,
                                                     latitude: registro.geoLocal.latitude,
                                                     longitude: registro.geoLocal.longitude,
+                                                    local: registro.geoLocal.stringLocal,
                                                     date: date,
                                                     time: time
                                                 }})
@@ -84,6 +88,18 @@ function PesquisarReg ({ employee, PesquisarRegToApp }) {
         pesquisar(dadosPesquisa)
     }
 
+    function fecharModal () {
+        setModalAberto(false)
+    }
+
+    function exibirFoto (foto) {
+        const buffer = foto
+        const base64String = Buffer.from(buffer).toString('base64')
+        setImagem(base64String)
+        console.log(base64String)
+        setModalAberto(true)
+    }
+
     if (employee.id && employee.isManager) {
         return (
             <Container customClass='cont'>
@@ -104,8 +120,8 @@ function PesquisarReg ({ employee, PesquisarRegToApp }) {
                                     <tr>
                                         <td className={styles.celtabhead}>Matr.</td>
                                         <td className={styles.celtabhead}>Dia e Hora</td>
-                                        <td className={styles.celtabhead}>Lat.</td>
-                                        <td className={styles.celtabhead}>Long.</td>
+                                        <td className={styles.celtabhead}>Local</td>
+                                        <td className={styles.celtabhead}></td>
                                         <td className={styles.celtabhead}>Editar</td>
                                         <td className={styles.celtabhead}>Del</td>
                                     </tr>
@@ -116,8 +132,14 @@ function PesquisarReg ({ employee, PesquisarRegToApp }) {
                                         <tr>
                                             <td className={styles.celtabbody}>{registro.registration}</td>
                                             <td className={styles.celtabnome}>{stringTime(registro.numberTime)}</td>
-                                            <td className={styles.celtabnome}>{registro.geoLocal.latitude}</td>
-                                            <td className={styles.celtabnome}>{registro.geoLocal.longitude}</td>
+                                            <td className={styles.celtabnome}>{registro.geoLocal.stringLocal}</td>
+                                            <td className={styles.celtabnome}>
+                                                <button
+                                                    type='button'
+                                                    onClick={() => exibirFoto(registro.image)}>
+                                                    <MdOutlinePhotoCamera className={styles.icon} />
+                                                </button>
+                                            </td>
                                             <td className={styles.celtabbody}>
                                                 <button
                                                     type='button' 
@@ -136,6 +158,7 @@ function PesquisarReg ({ employee, PesquisarRegToApp }) {
                                     }
                                 </tbody>
                             </table>
+                            {modalAberto ? <Modal foto={imagem} fecharModal={fecharModal} /> : null}
                         </div>
                     </div>
                 </Container>

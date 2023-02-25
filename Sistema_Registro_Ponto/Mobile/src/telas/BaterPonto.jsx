@@ -1,14 +1,19 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, Alert, SafeAreaView, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, Alert, SafeAreaView } from 'react-native'
+//import RNFetchBlob from 'rn-fetch-blob'
+import { Buffer } from 'buffer'
 
 import Header from '../layout/Header'
 import Relogio from '../utilits/Relogio'
 import Localizacao from '../utilits/Localizacao'
+import Foto from '../utilits/Foto'
 
-export default function Bponto({navigation, route, RelogioToBponto, LocalizacaoToBponto}) {
+export default function Bponto({navigation, route}) {
 
   const [relogio, setRelogio] = useState("")
   const [local, setLocal] = useState({coords: {latitude:"", longitude:""}})
+  const [adress, setAdress] = useState("")
+  const [foto, setFoto] = useState("file://")
 
   function RelogioToBponto (diaHora) {
     setRelogio(diaHora)
@@ -18,20 +23,30 @@ export default function Bponto({navigation, route, RelogioToBponto, LocalizacaoT
     setLocal(currentPosition)
   }
 
-  function Registrar () {
+  function AdressToBponto (adress) {
+    setAdress(adress)
+  }
 
-    let registro = 
+  function FotoToBponto (fotoCapturada) {
+    setFoto(fotoCapturada)
+  }
+
+  function Registrar () {
+   
+    const fotoBuffer = Buffer.from(foto, 'base64')
+
+   let registro = 
       {
         registration: route.params.paramKey.registration,
         geoLocal : 
           {
             latitude:local.coords.latitude,
-            longitude:local.coords.longitude
+            longitude:local.coords.longitude,
+            stringLocal: adress
           },
-        numberTime: relogio
+        numberTime: relogio,
+        image: fotoBuffer
       }
-
-      console.log(registro)
 
     fetch ('http://192.168.200.103:4000/register', {
             method: 'POST',
@@ -44,7 +59,7 @@ export default function Bponto({navigation, route, RelogioToBponto, LocalizacaoT
         .then((data) => {
             console.log(data)
             if (data.msg === "Ponto registrado com sucesso") {
-                navigation.navigate("Ultimos Registros", {paramKey: route.params.paramKey.registration})
+                navigation.navigate("Inicio", {paramKey:route.params.paramKey})
             }
             Alert.alert(data.msg)
         })
@@ -59,7 +74,7 @@ export default function Bponto({navigation, route, RelogioToBponto, LocalizacaoT
           <Text style={styles.txtInfo}> Matrícula: {route.params.paramKey.registration}</Text>
         </View>
         <Relogio RelogioToBponto={RelogioToBponto}/>
-        <Localizacao LocalizacaoToBponto={LocalizacaoToBponto}/>
+        <Localizacao LocalizacaoToBponto={LocalizacaoToBponto} AdressToBponto={AdressToBponto}/>
         <View style={styles.vBotao}>
           <TouchableHighlight
             style={styles.botaoRegistra}
@@ -68,6 +83,7 @@ export default function Bponto({navigation, route, RelogioToBponto, LocalizacaoT
             <Text style={styles.txtbotao}>Bater Ponto</Text>
           </TouchableHighlight>
         </View>
+            <Foto FotoToBponto={FotoToBponto}/>
       </SafeAreaView>
   );
 }
@@ -120,12 +136,6 @@ export default function Bponto({navigation, route, RelogioToBponto, LocalizacaoT
       marginTop:30,
       padding: 10,
     },
-    botaoLocal: {
-    
-    },
-    local: {
-      
-    },
     txtBtnLocal: {
       color: 'blue',
       fontWeight: 'bold'
@@ -151,6 +161,8 @@ export default function Bponto({navigation, route, RelogioToBponto, LocalizacaoT
     txtTitulo: {
       fontSize: 25,
       fontWeight: 'bold',
-    }
-
-  });
+    },
+    image: {
+      resizeMode: 'contain',
+  }
+  })

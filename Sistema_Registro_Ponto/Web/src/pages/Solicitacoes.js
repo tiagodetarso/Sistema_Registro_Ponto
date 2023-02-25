@@ -16,7 +16,6 @@ function Solicitacoes({ employee, SolicitacoesToApp }) {
     const apiKEY = process.env.REACT_APP_EMAILJS_API_KEY
 
     function sendEmail (form) {
-        console.log(form)
         emailjs.sendForm(serviceID, templateID, form , apiKEY)
         .then((result) => {
             console.log(result.text)

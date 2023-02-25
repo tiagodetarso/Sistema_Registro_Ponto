@@ -33,7 +33,7 @@ router.post('/', async(req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
     res.setHeader("Access-Control-Allow-Methods", "POST")
 
-    const { registration, geoLocal, numberTime } = req.body
+    const { registration, geoLocal, numberTime, image } = req.body
 
     // validations
     if (!registration) {
@@ -48,11 +48,16 @@ router.post('/', async(req, res) => {
         return res.status(422).json({msg: "Não foi feito o envio do número do dia e da hora do registro"})
     }
 
+    if (!image) {
+        return res.status(422).json({msg: "É necessário haver foto para enviar junto ao ponto"})
+    }
+
     // create Register
     const register = new Register({
         registration,
         geoLocal,
-        numberTime
+        numberTime,
+        image
     })
 
     try {
@@ -361,10 +366,10 @@ router.patch('/editar', async (req, res) => {
     if (
         !(numeros.some(v => dia.at(0).includes(v))) |
         !(numeros.some(v => dia.at(1).includes(v))) |
-        !(barra.some(v => dia.at(2).includes(v))) |
+        !(barra.some(v => dia.at(2).includes(v)))   |
         !(numeros.some(v => dia.at(3).includes(v))) |
         !(numeros.some(v => dia.at(4).includes(v))) |
-        !(barra.some(v => dia.at(5).includes(v))) |
+        !(barra.some(v => dia.at(5).includes(v)))   |
         !(numeros.some(v => dia.at(6).includes(v))) |
         !(numeros.some(v => dia.at(7).includes(v))) |
         !(numeros.some(v => dia.at(8).includes(v))) |
@@ -374,13 +379,13 @@ router.patch('/editar', async (req, res) => {
     }
 
     if (
-        !(numeros.some(v => hora.at(0).includes(v))) |
-        !(numeros.some(v => hora.at(1).includes(v))) |
+        !(numeros.some(v => hora.at(0).includes(v)))    |
+        !(numeros.some(v => hora.at(1).includes(v)))    |
         !(doisPontos.some(v => hora.at(2).includes(v))) |
-        !(numeros.some(v => hora.at(3).includes(v))) |
-        !(numeros.some(v => hora.at(4).includes(v))) |
+        !(numeros.some(v => hora.at(3).includes(v)))    |
+        !(numeros.some(v => hora.at(4).includes(v)))    |
         !(doisPontos.some(v => hora.at(5).includes(v))) |
-        !(numeros.some(v => hora.at(6).includes(v))) |
+        !(numeros.some(v => hora.at(6).includes(v)))    |
         !(numeros.some(v => hora.at(7).includes(v))) 
     ) {
         return res.status(422).json({msg: "A hora não está no formato correto!"})

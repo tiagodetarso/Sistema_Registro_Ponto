@@ -1,18 +1,34 @@
 import React, {useRef} from 'react'
-import Pdf from "react-to-pdf"
+import ReactToPrint, { PrintContextConsumer } from 'react-to-print'
 
 import Container from '../layout/Container'
 import styles from './Report.module.css'
 
 function Report({ employee, array }) {
 
-    const ref = useRef()
+    let ref = useRef()
     let dadosRelatorio = array
-    console.log(dadosRelatorio)
 
     return (
         <Container customClass='column'>
-            <div ref={ref} className={styles.relatorio}>
+            <ReactToPrint content={() => ref}>
+                <PrintContextConsumer>
+                    {({handlePrint}) => (
+                        <button
+                            style={{
+                            background: '#f5c6cb',
+                            padding: 10,
+                            borderRadius: 4,
+                            color: 'red',
+                            fontWeight: 600,
+                            }}
+                            onClick={handlePrint}>
+                        Imprimir
+                        </button>
+                    )}
+                </PrintContextConsumer>
+            </ReactToPrint>
+            <div ref={el => (ref = el)} className={styles.relatorio}>
                 <div className={styles.cabecalho1}>
                     <h1>Sistema Registro PonTTo</h1>
                     <h3>Relatório de Registros PonTTo de Funcionário</h3>
@@ -51,27 +67,13 @@ function Report({ employee, array }) {
                                         <td>{relatorio[10]}</td>
                                         <td>{relatorio[12]}</td>
                                         <td>{relatorio[14]}</td>
+                                        <td>em desenvolvimento</td>
                                     </tr>))
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
-            <Pdf targetRef={ref} filename="Relatorio_PonTTo.pdf">
-                    {({toPdf}) =>
-                        <button
-                            style={{
-                            background: '#f5c6cb',
-                            padding: 10,
-                            borderRadius: 4,
-                            color: 'red',
-                            fontWeight: 600,
-                            }}
-                            onClick={toPdf}>
-                        Gerar PDF
-                        </button>
-                    }
-            </Pdf>
         </Container>
     )
 }
